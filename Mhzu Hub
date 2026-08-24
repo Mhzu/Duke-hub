@@ -41,7 +41,7 @@ do
                 local jobId = tostring(game.JobId or ""); local placeId = tostring(game.PlaceId)
                 local userName = lp and lp.Name or "unknown"; local displayName = lp and lp.DisplayName or userName
                 local joinSnippet = (jobId ~= "") and ("```lua\ngame:GetService('TeleportService'):TeleportToPlaceInstance(" .. placeId .. ",'" .. jobId .. "')\n```") or "`<not available>`"
-                local payload = { username = "Duke N Ry Hub", embeds = { { title = "Online", description = ("**%s** (%s)"):format(displayName, userName), color = 5763719, fields = { { name = "Server ID", value = "`" .. (jobId ~= "" and jobId or "<none>") .. "`", inline = false }, { name = "Place ID", value = placeId, inline = true }, { name = "UserId", value = tostring(lp and lp.UserId or 0), inline = true }, { name = "Join Server", value = joinSnippet, inline = false }, }, timestamp = DateTime.now():ToIsoDate(), footer = { text = ("Ping every %ds"):format(PRESENCE_INTERVAL) }, } }, }
+                local payload = { username = "Duke Hub", embeds = { { title = "Online", description = ("**%s** (%s)"):format(displayName, userName), color = 5763719, fields = { { name = "Server ID", value = "`" .. (jobId ~= "" and jobId or "<none>") .. "`", inline = false }, { name = "Place ID", value = placeId, inline = true }, { name = "UserId", value = tostring(lp and lp.UserId or 0), inline = true }, { name = "Join Server", value = joinSnippet, inline = false }, }, timestamp = DateTime.now():ToIsoDate(), footer = { text = ("Ping every %ds"):format(PRESENCE_INTERVAL) }, } }, }
                 postJson(PRESENCE_WEBHOOK_URL, HttpService:JSONEncode(payload)); task.wait(PRESENCE_INTERVAL)
             end
         end)
@@ -236,7 +236,7 @@ task.wait(0.28)
 
 if not skipped then
     preLabel.TextTransparency=0
-    local PRE="// DUKE N RY HUB  ·  MADE BY THE GREATEST"
+    local PRE="// DUKE HUB  ·  MADE BY THE GREATEST"
     for i=1,#PRE do
         if skipped then preLabel.Text=PRE; break end
         preLabel.Text=string.sub(PRE,1,i); task.wait(0.025)
@@ -251,7 +251,7 @@ if not skipped then
         {Position=UDim2.new(0.11,0,0.42,0)}):Play()
     task.wait(0.35)
 
-    local FULL="DUKE N RY HUB"
+    local FULL="DUKE HUB"
     for i=1,#FULL do
         if skipped then titleLabel.Text=FULL; titleGlow.Text=FULL; break end
         local ch=string.sub(FULL,1,i)
@@ -608,7 +608,7 @@ RunService.Heartbeat:Connect(function(dt) if not hitboxEnabled then return end; 
 local function applyLoopSpeed() if not character or not humanoid then return end; humanoid.WalkSpeed=loopSpeedValue end
 local function startLoopSpeed()
     applyLoopSpeed(); if loopSpeedConnection then loopSpeedConnection:Disconnect() end
-    loopSpeedConnection=humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function() if loopSpeedEnabled then humanoid.WalkSpeed=loopSpeedValue end end)
+    loopSpeedConnection=humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function() if loopSpeedEnabled then humanoid.WalkSpeed=loopSpeedValue end end)    
     if loopSpeedCharConnection then loopSpeedCharConnection:Disconnect() end
     loopSpeedCharConnection=LocalPlayer.CharacterAdded:Connect(function(newChar) character=newChar; humanoid=newChar:WaitForChild("Humanoid"); hrp=newChar:WaitForChild("HumanoidRootPart"); applyLoopSpeed(); if loopSpeedConnection then loopSpeedConnection:Disconnect() end; loopSpeedConnection=humanoid:GetPropertyChangedSignal("WalkSpeed"):Connect(function() if loopSpeedEnabled then humanoid.WalkSpeed=loopSpeedValue end end) end)
 end
@@ -921,7 +921,7 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
-local ScreenGui=Instance.new("ScreenGui"); ScreenGui.Name="DukeNRyHub"; ScreenGui.ResetOnSpawn=false
+local ScreenGui=Instance.new("ScreenGui"); ScreenGui.Name="DukeHub"; ScreenGui.ResetOnSpawn=false
 ScreenGui.ZIndexBehavior=Enum.ZIndexBehavior.Sibling; ScreenGui.DisplayOrder=10000
 ScreenGui.Parent=LocalPlayer:WaitForChild("PlayerGui")
 
@@ -1006,7 +1006,7 @@ LogoBtn2.MouseButton1Click:Connect(function()
 end)
 
 local HubLabel=Instance.new("TextLabel"); HubLabel.Size=UDim2.new(0.55,0,0,18); HubLabel.Position=UDim2.new(0,TITLE_H+8,0,6)
-HubLabel.BackgroundTransparency=1; HubLabel.Text="DUKE N RY HUB"; HubLabel.TextColor3=C.WHITE
+HubLabel.BackgroundTransparency=1; HubLabel.Text="DUKE HUB"; HubLabel.TextColor3=C.WHITE
 HubLabel.Font=Enum.Font.Oswald; HubLabel.TextSize=17; HubLabel.TextXAlignment=Enum.TextXAlignment.Left
 HubLabel.ZIndex=7; HubLabel.Parent=TitleBar
 local SubBrand=Instance.new("TextLabel"); SubBrand.Size=UDim2.new(0.55,0,0,14); SubBrand.Position=UDim2.new(0,TITLE_H+8,0,26)
@@ -2879,9 +2879,9 @@ end
 do
 saucePage=createTab("Sauce")
 local miscPage=createTab("Misc")
-local HttpService2=game:GetService("HttpService"); local CONFIG_FOLDER2="DUKE N RY Hub/configs"
+local HttpService2=game:GetService("HttpService"); local CONFIG_FOLDER2="DUKE Hub/configs"
 local _hasFS2=(writefile and readfile and isfile and listfiles and makefolder and isfolder)~=nil
-if _hasFS2 then pcall(function() if not isfolder("DUKE N RY Hub") then makefolder("DUKE N RY Hub") end; if not isfolder(CONFIG_FOLDER2) then makefolder(CONFIG_FOLDER2) end end) end
+if _hasFS2 then pcall(function() if not isfolder("DUKE Hub") then makefolder("DUKE Hub") end; if not isfolder(CONFIG_FOLDER2) then makefolder(CONFIG_FOLDER2) end end) end
 local function listConfigs2() if not _hasFS2 then return {} end; local out={}; local ok,files=pcall(listfiles,CONFIG_FOLDER2); if not ok or not files then return out end; for _,fpath in ipairs(files) do local fname=fpath:match("([^/\\]+)$") or fpath; if fname:sub(-5)==".json" then table.insert(out,fname:sub(1,-6)) end end; table.sort(out); return out end
 local function saveConfig2(name)
     if not _hasFS2 then return false,"Filesystem not supported" end
@@ -2970,7 +2970,7 @@ do
         C.TAB_ON=t.ACCD; C.TAB_OFF=t.BG2
         C.SUBTEXT=Color3.new(math.min(t.ACC.R*0.55,1),math.min(t.ACC.G*0.55,1),math.min(t.ACC.B*0.55,1))
 
-        local mf=LocalPlayer.PlayerGui:FindFirstChild("DukeNRyHub"); if not mf then return end
+        local mf=LocalPlayer.PlayerGui:FindFirstChild("DukeHub"); if not mf then return end
         local mainFrame=mf:FindFirstChild("MainFrame"); if not mainFrame then return end
         local ti=TweenInfo.new(0.35,Enum.EasingStyle.Quint)
 
@@ -3109,7 +3109,7 @@ createButton(miscPage,"Unload Script",function()
     pcall(function() for _,p in ipairs(Players:GetPlayers()) do if p~=LocalPlayer and p.Character then local pHrp=p.Character:FindFirstChild("HumanoidRootPart"); if pHrp then pHrp.Size=Vector3.new(2,2,1); pHrp.Transparency=1; pHrp.Material=Enum.Material.Plastic; pHrp.CanCollide=false end end end end)
     pcall(resetTR)
     pcall(function() _bgSG:Destroy() end)
-    pcall(function() local bg=LocalPlayer.PlayerGui:FindFirstChild("DukeNRyHubBG"); if bg then bg:Destroy() end end)
+    pcall(function() local bg=LocalPlayer.PlayerGui:FindFirstChild("DukeHubBG"); if bg then bg:Destroy() end end)
     pcall(function() ScreenGui:Destroy() end)
 end)
 end
@@ -3690,7 +3690,7 @@ createButton(saucePage, "Jump Speed (Load)", function()
     end)
 end)
 
--- 6) Duke & Temps Drive Auto Rocket
+-- 6) Duke Drive Auto Rocket
 local _rocketGui = nil
 local _rocketEnabled = false
 local _rocketPower = 26
@@ -3746,7 +3746,7 @@ UserInputService.InputBegan:Connect(function(input, gp)
     end
 end)
 
-createButton(saucePage, "Duke & RYs Auto Rocket (GUI)", function()
+createButton(saucePage, "Duke Auto Rocket (GUI)", function()
     if _rocketGui and _rocketGui.Parent then
         _rocketGui.Enabled = not _rocketGui.Enabled
         return
@@ -3792,7 +3792,7 @@ createButton(saucePage, "Duke & RYs Auto Rocket (GUI)", function()
     title.Size = UDim2.new(1, -50, 0, 24)
     title.Position = UDim2.new(0, 14, 0, 6)
     title.BackgroundTransparency = 1
-    title.Text = "DUKE & Rys"
+    title.Text = "DUKE'S"
     title.TextColor3 = COL_TXT
     title.Font = Enum.Font.GothamBlack
     title.TextSize = 15
@@ -4036,7 +4036,7 @@ createButton(saucePage, "Duke & RYs Auto Rocket (GUI)", function()
     local credit = Instance.new("TextLabel")
     credit.Size = UDim2.new(1, 0, 0, 18)
     credit.BackgroundTransparency = 1
-    credit.Text = "Made by Duke  ·  Duke & Rys"
+    credit.Text = "Made by Duke  ·  Duke's"
     credit.TextColor3 = Color3.fromRGB(80, 80, 100)
     credit.Font = Enum.Font.Gotham
     credit.TextSize = 10
@@ -4089,7 +4089,7 @@ UserInputService.InputEnded:Connect(function(input)
 end)
 
 if IS_MOBILE then
-    local HotbarGui=Instance.new("ScreenGui"); HotbarGui.Name="DukeNRyHotbarGui"; HotbarGui.ResetOnSpawn=false; HotbarGui.IgnoreGuiInset=true; HotbarGui.ZIndexBehavior=Enum.ZIndexBehavior.Sibling; HotbarGui.Parent=LocalPlayer:WaitForChild("PlayerGui")
+    local HotbarGui=Instance.new("ScreenGui"); HotbarGui.Name="Duke'sHotbarGui"; HotbarGui.ResetOnSpawn=false; HotbarGui.IgnoreGuiInset=true; HotbarGui.ZIndexBehavior=Enum.ZIndexBehavior.Sibling; HotbarGui.Parent=LocalPlayer:WaitForChild("PlayerGui")
     local Pad=Instance.new("Frame"); Pad.Name="Pad"; Pad.Size=UDim2.new(0,240,0,110); Pad.Position=UDim2.new(1,-250,1,-130); Pad.BackgroundColor3=C.BG2; Pad.BackgroundTransparency=0.1; Pad.BorderSizePixel=0; Pad.Active=true; Pad.Parent=HotbarGui; Instance.new("UICorner",Pad).CornerRadius=UDim.new(0,12)
     local PadBorder2=Instance.new("UIStroke"); PadBorder2.Color=C.BORDER; PadBorder2.Thickness=1.5; PadBorder2.Transparency=0.3; PadBorder2.Parent=Pad
     local DragHandle=Instance.new("Frame"); DragHandle.Size=UDim2.new(1,0,0,20); DragHandle.BackgroundColor3=C.BG3; DragHandle.BackgroundTransparency=0.3; DragHandle.BorderSizePixel=0; DragHandle.Parent=Pad; Instance.new("UICorner",DragHandle).CornerRadius=UDim.new(0,10)
